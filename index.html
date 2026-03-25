@@ -3837,41 +3837,61 @@ function handleLabelUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
 
+  // Show scanning step immediately
+  document.getElementById('labelStep1').classList.add('hidden');
+  document.getElementById('labelScanning').classList.remove('hidden');
+  document.getElementById('labelStep2').classList.add('hidden');
+  document.getElementById('scanProgress').style.width = '0%';
+  document.getElementById('scanStatus').textContent = 'Processing image...';
+
+  // Read file as data URL for preview + image loading
   const reader = new FileReader();
   reader.onload = (e) => {
     const dataUrl = e.target.result;
     document.getElementById('labelPreviewImg').src = dataUrl;
     document.getElementById('labelScanPreview').src = dataUrl;
 
-    // Show scanning step
-    document.getElementById('labelStep1').classList.add('hidden');
-    document.getElementById('labelScanning').classList.remove('hidden');
-    document.getElementById('labelStep2').classList.add('hidden');
-    document.getElementById('scanProgress').style.width = '0%';
-    document.getElementById('scanStatus').textContent = 'Initializing scanner...';
-
-    // Load image → draw to canvas → convert to PNG Blob → send to Tesseract
     const img = new Image();
     img.onload = () => {
+      document.getElementById('scanStatus').textContent = 'Preparing image for scan...';
+      document.getElementById('scanProgress').style.width = '5%';
+
+      // Resize large images (phone photos can be 4000x3000+, too big for OCR)
+      const MAX_DIM = 1500;
+      let w = img.naturalWidth;
+      let h = img.naturalHeight;
+      if (w > MAX_DIM || h > MAX_DIM) {
+        const scale = MAX_DIM / Math.max(w, h);
+        w = Math.round(w * scale);
+        h = Math.round(h * scale);
+      }
+
       const canvas = document.createElement('canvas');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      canvas.getContext('2d').drawImage(img, 0, 0);
-      // Convert canvas to a PNG Blob — most reliable format for Tesseract v5
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      // White background (helps OCR with transparent PNGs)
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
+
+      // Convert to JPEG blob (smaller, faster, no transparency issues)
       canvas.toBlob((blob) => {
         if (blob) {
+          console.log('Image prepared:', w + 'x' + h, (blob.size / 1024).toFixed(0) + 'KB');
           runNutritionOCR(blob);
         } else {
-          // toBlob failed, fall back to manual
           ocrFallbackToManual('Could not process image');
         }
-      }, 'image/png');
+      }, 'image/jpeg', 0.9);
     };
     img.onerror = () => {
-      // Browser can't decode this format (HEIC etc) — fall back to manual
-      ocrFallbackToManual('Unsupported image format. Please use JPG or PNG.');
+      ocrFallbackToManual('Unsupported image format. Try taking a screenshot of the label instead.');
     };
     img.src = dataUrl;
+  };
+  reader.onerror = () => {
+    ocrFallbackToManual('Could not read file.');
   };
   reader.readAsDataURL(file);
 }
