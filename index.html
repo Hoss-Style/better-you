@@ -3837,39 +3837,45 @@ function handleLabelUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
 
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    const dataUrl = e.target.result;
-    document.getElementById('labelPreviewImg').src = dataUrl;
-    document.getElementById('labelScanPreview').src = dataUrl;
+  // Use createObjectURL for preview (works with more formats)
+  const objectUrl = URL.createObjectURL(file);
+  document.getElementById('labelPreviewImg').src = objectUrl;
+  document.getElementById('labelScanPreview').src = objectUrl;
 
-    // Show scanning step
-    document.getElementById('labelStep1').classList.add('hidden');
-    document.getElementById('labelScanning').classList.remove('hidden');
-    document.getElementById('labelStep2').classList.add('hidden');
-    document.getElementById('scanProgress').style.width = '0%';
-    document.getElementById('scanStatus').textContent = 'Initializing scanner...';
+  // Show scanning step
+  document.getElementById('labelStep1').classList.add('hidden');
+  document.getElementById('labelScanning').classList.remove('hidden');
+  document.getElementById('labelStep2').classList.add('hidden');
+  document.getElementById('scanProgress').style.width = '0%';
+  document.getElementById('scanStatus').textContent = 'Initializing scanner...';
 
-    // Convert image to Canvas for Tesseract (most reliable input format)
-    const img = new Image();
-    img.onload = () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0);
-      runNutritionOCR(canvas);
+  // Try canvas approach first, fall back to ArrayBuffer for HEIC/unsupported formats
+  const img = new Image();
+  img.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    canvas.getContext('2d').drawImage(img, 0, 0);
+    URL.revokeObjectURL(objectUrl);
+    runNutritionOCR(canvas);
+  };
+  img.onerror = () => {
+    URL.revokeObjectURL(objectUrl);
+    // Canvas failed (likely HEIC) — read as ArrayBuffer for Tesseract
+    const abReader = new FileReader();
+    abReader.onload = (ev) => {
+      const uint8 = new Uint8Array(ev.target.result);
+      runNutritionOCR(uint8);
     };
-    img.onerror = () => {
-      console.error('Failed to load image for OCR');
-      // Fall back to manual entry
+    abReader.onerror = () => {
       document.getElementById('labelScanning').classList.add('hidden');
       document.getElementById('labelStep2').classList.remove('hidden');
       autoSelectMealTime();
     };
-    img.src = dataUrl;
+    abReader.readAsArrayBuffer(file);
   };
-  reader.readAsDataURL(file);
+  img.src = objectUrl;
+
 }
 
 // Load a script from a URL and return a promise
