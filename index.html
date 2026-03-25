@@ -3837,9 +3837,6 @@ function handleLabelUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
 
-  // Store the file blob for OCR (Tesseract v5 needs a Blob, not a data URL)
-  window._labelFileBlob = file;
-
   const reader = new FileReader();
   reader.onload = (e) => {
     const dataUrl = e.target.result;
@@ -3853,8 +3850,24 @@ function handleLabelUpload(event) {
     document.getElementById('scanProgress').style.width = '0%';
     document.getElementById('scanStatus').textContent = 'Initializing scanner...';
 
-    // Run OCR with the File blob (not data URL)
-    runNutritionOCR(file);
+    // Convert image to Canvas for Tesseract (most reliable input format)
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      runNutritionOCR(canvas);
+    };
+    img.onerror = () => {
+      console.error('Failed to load image for OCR');
+      // Fall back to manual entry
+      document.getElementById('labelScanning').classList.add('hidden');
+      document.getElementById('labelStep2').classList.remove('hidden');
+      autoSelectMealTime();
+    };
+    img.src = dataUrl;
   };
   reader.readAsDataURL(file);
 }
