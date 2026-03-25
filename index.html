@@ -3837,45 +3837,56 @@ function handleLabelUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
 
-  // Use createObjectURL for preview (works with more formats)
-  const objectUrl = URL.createObjectURL(file);
-  document.getElementById('labelPreviewImg').src = objectUrl;
-  document.getElementById('labelScanPreview').src = objectUrl;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const dataUrl = e.target.result;
+    document.getElementById('labelPreviewImg').src = dataUrl;
+    document.getElementById('labelScanPreview').src = dataUrl;
 
-  // Show scanning step
-  document.getElementById('labelStep1').classList.add('hidden');
-  document.getElementById('labelScanning').classList.remove('hidden');
-  document.getElementById('labelStep2').classList.add('hidden');
-  document.getElementById('scanProgress').style.width = '0%';
-  document.getElementById('scanStatus').textContent = 'Initializing scanner...';
+    // Show scanning step
+    document.getElementById('labelStep1').classList.add('hidden');
+    document.getElementById('labelScanning').classList.remove('hidden');
+    document.getElementById('labelStep2').classList.add('hidden');
+    document.getElementById('scanProgress').style.width = '0%';
+    document.getElementById('scanStatus').textContent = 'Initializing scanner...';
 
-  // Try canvas approach first, fall back to ArrayBuffer for HEIC/unsupported formats
-  const img = new Image();
-  img.onload = () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
-    canvas.getContext('2d').drawImage(img, 0, 0);
-    URL.revokeObjectURL(objectUrl);
-    runNutritionOCR(canvas);
-  };
-  img.onerror = () => {
-    URL.revokeObjectURL(objectUrl);
-    // Canvas failed (likely HEIC) — read as ArrayBuffer for Tesseract
-    const abReader = new FileReader();
-    abReader.onload = (ev) => {
-      const uint8 = new Uint8Array(ev.target.result);
-      runNutritionOCR(uint8);
+    // Load image → draw to canvas → convert to PNG Blob → send to Tesseract
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      canvas.getContext('2d').drawImage(img, 0, 0);
+      // Convert canvas to a PNG Blob — most reliable format for Tesseract v5
+      canvas.toBlob((blob) => {
+        if (blob) {
+          runNutritionOCR(blob);
+        } else {
+          // toBlob failed, fall back to manual
+          ocrFallbackToManual('Could not process image');
+        }
+      }, 'image/png');
     };
-    abReader.onerror = () => {
-      document.getElementById('labelScanning').classList.add('hidden');
-      document.getElementById('labelStep2').classList.remove('hidden');
-      autoSelectMealTime();
+    img.onerror = () => {
+      // Browser can't decode this format (HEIC etc) — fall back to manual
+      ocrFallbackToManual('Unsupported image format. Please use JPG or PNG.');
     };
-    abReader.readAsArrayBuffer(file);
+    img.src = dataUrl;
   };
-  img.src = objectUrl;
+  reader.readAsDataURL(file);
+}
 
+function ocrFallbackToManual(msg) {
+  document.getElementById('labelScanning').classList.add('hidden');
+  document.getElementById('labelStep2').classList.remove('hidden');
+  document.getElementById('ocrBanner').classList.remove('hidden');
+  document.getElementById('ocrBanner').style.display = 'flex';
+  document.getElementById('ocrBanner').style.borderColor = 'rgba(255,180,0,0.3)';
+  document.getElementById('ocrBanner').style.background = 'rgba(255,180,0,0.1)';
+  document.getElementById('ocrBannerText').textContent = msg || 'Scan failed — enter values manually.';
+  document.getElementById('ocrBannerText').style.color = '#ffb400';
+  document.getElementById('labelStep2Hint').textContent = 'Enter the values you see on the label:';
+  autoSelectMealTime();
 }
 
 // Load a script from a URL and return a promise
