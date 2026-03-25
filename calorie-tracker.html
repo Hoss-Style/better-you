@@ -3837,6 +3837,9 @@ function handleLabelUpload(event) {
   const file = event.target.files[0];
   if (!file) return;
 
+  // Store the file blob for OCR (Tesseract v5 needs a Blob, not a data URL)
+  window._labelFileBlob = file;
+
   const reader = new FileReader();
   reader.onload = (e) => {
     const dataUrl = e.target.result;
@@ -3850,8 +3853,8 @@ function handleLabelUpload(event) {
     document.getElementById('scanProgress').style.width = '0%';
     document.getElementById('scanStatus').textContent = 'Initializing scanner...';
 
-    // Run OCR
-    runNutritionOCR(dataUrl);
+    // Run OCR with the File blob (not data URL)
+    runNutritionOCR(file);
   };
   reader.readAsDataURL(file);
 }
@@ -3872,53 +3875,38 @@ async function runNutritionOCR(imageDataUrl) {
   const statusText = document.getElementById('scanStatus');
 
   try {
-    // Step 1: Load Tesseract.js v2 (most stable, best browser compat)
+    // Step 1: Load Tesseract.js v5 from CDN
     if (typeof Tesseract === 'undefined') {
       statusText.textContent = 'Loading OCR engine...';
       progressBar.style.width = '5%';
 
-      let loaded = false;
-      const cdns = [
-        'https://unpkg.com/tesseract.js@2.1.5/dist/tesseract.min.js',
-        'https://cdn.jsdelivr.net/npm/tesseract.js@2.1.5/dist/tesseract.min.js',
-      ];
-      for (const src of cdns) {
-        try {
-          await loadScript(src);
-          if (typeof Tesseract !== 'undefined') { loaded = true; break; }
-        } catch(e) { console.warn('CDN failed:', src); }
+      await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js');
+
+      if (typeof Tesseract === 'undefined') {
+        throw new Error('Could not load OCR engine. Check your internet connection.');
       }
-      if (!loaded) throw new Error('Could not load OCR engine. Check your internet connection.');
     }
 
-    progressBar.style.width = '10%';
-    statusText.textContent = 'Initializing scanner...';
+    progressBar.style.width = '15%';
+    statusText.textContent = 'Starting OCR engine (first time may take 10-15s)...';
 
-    // Step 2: Create worker + load language + run OCR (v2 API)
-    const worker = Tesseract.createWorker({
+    // Step 2: Create worker and recognize — Tesseract.js v5 API
+    const worker = await Tesseract.createWorker('eng', 1, {
       logger: (m) => {
         if (m.status === 'recognizing text') {
           progressBar.style.width = Math.round(40 + m.progress * 50) + '%';
           statusText.textContent = 'Reading label text...';
         } else if (m.status === 'loading language traineddata') {
-          progressBar.style.width = '20%';
+          progressBar.style.width = '25%';
           statusText.textContent = 'Downloading language data (first time only)...';
-        } else if (m.status === 'loaded language traineddata') {
-          progressBar.style.width = '30%';
-          statusText.textContent = 'Language data loaded!';
         } else if (m.status === 'initializing api') {
           progressBar.style.width = '35%';
-          statusText.textContent = 'Starting OCR...';
+          statusText.textContent = 'Initializing OCR...';
         }
       }
     });
 
-    await worker.load();
-    progressBar.style.width = '15%';
-    await worker.loadLanguage('eng');
-    progressBar.style.width = '25%';
-    await worker.initialize('eng');
-    progressBar.style.width = '35%';
+    progressBar.style.width = '40%';
     statusText.textContent = 'Scanning label...';
 
     const { data } = await worker.recognize(imageDataUrl);
