@@ -648,6 +648,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
 }
 
 .onboarding-card {
@@ -658,6 +661,7 @@ body {
   width: 90%;
   max-width: 480px;
   text-align: center;
+  margin: auto;
 }
 
 .onboarding-card .logo {
@@ -885,9 +889,21 @@ body {
   .data-table th { padding: 8px; font-size: 10px; }
   .data-table td { padding: 8px; font-size: 12px; }
 
-  /* Onboarding */
-  .onboarding-card { padding: 24px 20px; }
+  /* Onboarding — must scroll on mobile */
+  .onboarding-overlay { align-items: flex-start; padding: 12px; }
+  .onboarding-card {
+    padding: 24px 16px;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px;
+    margin: 0 auto;
+  }
   .onboarding-card h2 { font-size: 20px; }
+  .onboarding-card p { font-size: 13px; margin-bottom: 20px; }
+  .onboarding-card .logo { width: 48px; height: 48px; font-size: 24px; border-radius: 12px; margin-bottom: 14px; }
+  .onboarding-card .form-group { margin-bottom: 12px; }
+  .onboarding-card .form-input, .onboarding-card .form-select { font-size: 16px; padding: 12px; }
+  .onboarding-card .unit-toggle button { padding: 10px; font-size: 13px; }
 
   /* Macro bar */
   .macro-bar { height: 8px; }
@@ -1104,7 +1120,7 @@ body {
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Age</label>
-        <input type="number" id="ob-age" class="form-input" placeholder="28" min="10" max="120">
+        <input type="number" inputmode="numeric" id="ob-age" class="form-input" placeholder="28" min="10" max="120">
       </div>
       <div class="form-group">
         <label class="form-label">Sex</label>
@@ -1125,23 +1141,23 @@ body {
       <div class="form-group">
         <label class="form-label">Height</label>
         <div style="display:flex;gap:8px;">
-          <input type="number" id="ob-feet" class="form-input" placeholder="5" min="3" max="8" style="width:50%">
-          <input type="number" id="ob-inches" class="form-input" placeholder="10" min="0" max="11" style="width:50%">
+          <input type="number" inputmode="numeric" id="ob-feet" class="form-input" placeholder="5" min="3" max="8" style="width:50%">
+          <input type="number" inputmode="numeric" id="ob-inches" class="form-input" placeholder="10" min="0" max="11" style="width:50%">
         </div>
       </div>
       <div class="form-group">
         <label class="form-label">Weight (lbs)</label>
-        <input type="number" id="ob-weight-lbs" class="form-input" placeholder="170">
+        <input type="number" inputmode="numeric" id="ob-weight-lbs" class="form-input" placeholder="170">
       </div>
     </div>
     <div class="form-row hidden" id="metric-inputs">
       <div class="form-group">
         <label class="form-label">Height (cm)</label>
-        <input type="number" id="ob-height-cm" class="form-input" placeholder="178">
+        <input type="number" inputmode="numeric" id="ob-height-cm" class="form-input" placeholder="178">
       </div>
       <div class="form-group">
         <label class="form-label">Weight (kg)</label>
-        <input type="number" id="ob-weight-kg" class="form-input" placeholder="77">
+        <input type="number" inputmode="numeric" id="ob-weight-kg" class="form-input" placeholder="77">
       </div>
     </div>
     <div class="form-group">
@@ -1541,7 +1557,7 @@ body {
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Age</label>
-          <input type="number" id="prof-age" class="form-input">
+          <input type="number" inputmode="numeric" id="prof-age" class="form-input">
         </div>
         <div class="form-group">
           <label class="form-label">Sex</label>
@@ -1554,11 +1570,11 @@ body {
       <div class="form-row">
         <div class="form-group">
           <label class="form-label">Height (cm)</label>
-          <input type="number" id="prof-height" class="form-input">
+          <input type="number" inputmode="numeric" id="prof-height" class="form-input">
         </div>
         <div class="form-group">
           <label class="form-label">Weight (kg)</label>
-          <input type="number" id="prof-weight" class="form-input">
+          <input type="number" inputmode="numeric" id="prof-weight" class="form-input">
         </div>
       </div>
       <div class="form-group">
@@ -1634,7 +1650,7 @@ body {
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Servings</label>
-        <input type="number" id="edit-food-servings" class="form-input" step="0.25" min="0.25">
+        <input type="number" inputmode="decimal" id="edit-food-servings" class="form-input" step="0.25" min="0.25">
       </div>
       <div class="form-group">
         <label class="form-label">Meal</label>
@@ -1649,21 +1665,21 @@ body {
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Calories</label>
-        <input type="number" id="edit-food-cal" class="form-input">
+        <input type="number" inputmode="numeric" id="edit-food-cal" class="form-input">
       </div>
       <div class="form-group">
         <label class="form-label">Protein (g)</label>
-        <input type="number" id="edit-food-protein" class="form-input">
+        <input type="number" inputmode="numeric" id="edit-food-protein" class="form-input">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Carbs (g)</label>
-        <input type="number" id="edit-food-carbs" class="form-input">
+        <input type="number" inputmode="numeric" id="edit-food-carbs" class="form-input">
       </div>
       <div class="form-group">
         <label class="form-label">Fat (g)</label>
-        <input type="number" id="edit-food-fat" class="form-input">
+        <input type="number" inputmode="numeric" id="edit-food-fat" class="form-input">
       </div>
     </div>
     <div class="modal-actions">
@@ -1687,18 +1703,18 @@ body {
     <div class="form-group">
       <label class="form-label">Intensity (MET value)</label>
       <div style="display:flex;gap:8px;align-items:center;">
-        <input type="number" id="edit-ex-met" class="form-input" step="0.5" min="1" max="20" oninput="recalcExerciseBurn()">
+        <input type="number" inputmode="decimal" id="edit-ex-met" class="form-input" step="0.5" min="1" max="20" oninput="recalcExerciseBurn()">
         <span id="edit-ex-met-label" style="font-size:11px;color:var(--text-muted);white-space:nowrap;min-width:80px;"></span>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Duration (min)</label>
-        <input type="number" id="edit-ex-duration" class="form-input" oninput="recalcExerciseBurn()">
+        <input type="number" inputmode="numeric" id="edit-ex-duration" class="form-input" oninput="recalcExerciseBurn()">
       </div>
       <div class="form-group">
         <label class="form-label">Calories Burned <span id="edit-ex-cal-auto" style="font-size:11px;color:var(--green);">(auto-calculated)</span></label>
-        <input type="number" id="edit-ex-cal" class="form-input">
+        <input type="number" inputmode="numeric" id="edit-ex-cal" class="form-input">
       </div>
     </div>
     <div id="edit-ex-calc-note" style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;padding:8px 12px;background:var(--bg-primary);border-radius:6px;">
@@ -1768,42 +1784,42 @@ body {
       <div class="label-fields">
         <div class="label-field">
           <span class="label-field-name">Calories</span>
-          <input type="number" id="label-cal" placeholder="0">
+          <input type="number" inputmode="numeric" id="label-cal" placeholder="0">
           <span class="label-field-unit">cal</span>
         </div>
         <div class="label-field">
           <span class="label-field-name">Protein</span>
-          <input type="number" id="label-protein" placeholder="0">
+          <input type="number" inputmode="numeric" id="label-protein" placeholder="0">
           <span class="label-field-unit">g</span>
         </div>
         <div class="label-field">
           <span class="label-field-name">Carbs</span>
-          <input type="number" id="label-carbs" placeholder="0">
+          <input type="number" inputmode="numeric" id="label-carbs" placeholder="0">
           <span class="label-field-unit">g</span>
         </div>
         <div class="label-field">
           <span class="label-field-name">Fat</span>
-          <input type="number" id="label-fat" placeholder="0">
+          <input type="number" inputmode="numeric" id="label-fat" placeholder="0">
           <span class="label-field-unit">g</span>
         </div>
         <div class="label-field">
           <span class="label-field-name">Fiber</span>
-          <input type="number" id="label-fiber" placeholder="0">
+          <input type="number" inputmode="numeric" id="label-fiber" placeholder="0">
           <span class="label-field-unit">g</span>
         </div>
         <div class="label-field">
           <span class="label-field-name">Sugar</span>
-          <input type="number" id="label-sugar" placeholder="0">
+          <input type="number" inputmode="numeric" id="label-sugar" placeholder="0">
           <span class="label-field-unit">g</span>
         </div>
         <div class="label-field">
           <span class="label-field-name">Sodium</span>
-          <input type="number" id="label-sodium" placeholder="0">
+          <input type="number" inputmode="numeric" id="label-sodium" placeholder="0">
           <span class="label-field-unit">mg</span>
         </div>
         <div class="label-field">
           <span class="label-field-name">Servings</span>
-          <input type="number" id="label-servings" value="1" step="0.5" min="0.5">
+          <input type="number" inputmode="decimal" id="label-servings" value="1" step="0.5" min="0.5">
           <span class="label-field-unit">#</span>
         </div>
       </div>
