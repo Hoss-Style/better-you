@@ -2411,8 +2411,8 @@ const FOOD_DB = [
   {name:"Coleslaw", cal:150, protein:1, carbs:13, fat:11, serving:"1 cup", category:"vegetables", aliases:["coleslaw","cole slaw"]},
 
   // === FRUITS ===
-  {name:"Banana", cal:105, protein:1.3, carbs:27, fat:0.4, serving:"1 medium", category:"fruits", aliases:["banana"]},
-  {name:"Apple", cal:95, protein:0.5, carbs:25, fat:0.3, serving:"1 medium", category:"fruits", aliases:["apple"]},
+  {name:"Banana", cal:105, protein:1.3, carbs:27, fat:0.4, serving:"1 medium", category:"fruits", aliases:["banana","bananas","1 banana","a banana"]},
+  {name:"Apple", cal:95, protein:0.5, carbs:25, fat:0.3, serving:"1 medium", category:"fruits", aliases:["apple","apples","1 apple","a apple","an apple"]},
   {name:"Orange", cal:62, protein:1.2, carbs:15, fat:0.2, serving:"1 medium", category:"fruits", aliases:["orange"]},
   {name:"Strawberries", cal:49, protein:1, carbs:12, fat:0.5, serving:"1 cup", category:"fruits", aliases:["strawberries","strawberry"]},
   {name:"Blueberries", cal:84, protein:1.1, carbs:21, fat:0.5, serving:"1 cup", category:"fruits", aliases:["blueberries","blueberry"]},
@@ -2982,6 +2982,122 @@ const FOOD_DB = [
   {name:"Sirloin Steak Grilled", brand:"Generic", cal:280, protein:26, carbs:0, fat:19, serving:"3.5 oz (100g)", category:"meat", aliases:["sirloin steak","sirloin"]},
   {name:"Ribeye Steak Grilled", brand:"Generic", cal:350, protein:24, carbs:0, fat:28, serving:"3.5 oz (100g)", category:"meat", aliases:["ribeye steak","ribeye"]},
   {name:"Filet Mignon Grilled", brand:"Generic", cal:280, protein:27, carbs:0, fat:18, serving:"3.5 oz (100g)", category:"meat", aliases:["filet mignon","filet"]},
+
+  // === TRADER JOE'S — Beverages ===
+  {name:"Trader Joe's Cold Brew Coffee", brand:"Trader Joe's", cal:10, protein:1, carbs:1, fat:0, serving:"8 oz", category:"drinks", aliases:["tj cold brew","trader joes cold brew"]},
+  {name:"Trader Joe's Iced Coffee", brand:"Trader Joe's", cal:5, protein:0.5, carbs:0, fat:0, serving:"8 oz", category:"drinks", aliases:["tj iced coffee"]},
+  {name:"Trader Joe's Coffee Concentrate", brand:"Trader Joe's", cal:40, protein:2, carbs:3, fat:1, serving:"1 oz concentrate", category:"drinks", aliases:["tj coffee concentrate"]},
+  {name:"Trader Joe's Pumpkin Spice Coffee", brand:"Trader Joe's", cal:5, protein:0.5, carbs:0.5, fat:0, serving:"8 oz", category:"drinks", aliases:["tj pumpkin coffee","trader joes pumpkin spice coffee"]},
+
+  // === TRADER JOE'S — Prepared Foods ===
+  {name:"Trader Joe's Everything But The Bagel Seasoned Smoked Salmon", brand:"Trader Joe's", cal:150, protein:17, carbs:2, fat:9, serving:"1 pkg (113g)", category:"prepared foods", aliases:["tj bagel salmon","trader joes smoked salmon"]},
+  {name:"Trader Joe's Chicken Tikka Masala", brand:"Trader Joe's", cal:280, protein:17, carbs:20, fat:14, serving:"1 serving (227g)", category:"frozen meals", aliases:["tj tikka masala"]},
+  {name:"Trader Joe's Butter Chicken", brand:"Trader Joe's", cal:290, protein:18, carbs:18, fat:16, serving:"1 serving (227g)", category:"frozen meals", aliases:["tj butter chicken"]},
+  {name:"Trader Joe's Frozen Gyoza", brand:"Trader Joe's", cal:180, protein:7, carbs:24, fat:7, serving:"6 pieces", category:"frozen meals", aliases:["tj gyoza","trader joes gyoza","potstickers"]},
+  {name:"Trader Joe's Frozen Fried Rice", brand:"Trader Joe's", cal:220, protein:6, carbs:35, fat:7, serving:"1 cup (218g)", category:"frozen meals", aliases:["tj fried rice"]},
+  {name:"Trader Joe's Korean Beef Bowl", brand:"Trader Joe's", cal:330, protein:19, carbs:28, fat:16, serving:"1 bowl (283g)", category:"frozen meals", aliases:["tj korean beef"]},
+  {name:"Trader Joe's Chicken Fried Rice", brand:"Trader Joe's", cal:230, protein:8, carbs:36, fat:6, serving:"1 cup (227g)", category:"frozen meals", aliases:["tj chicken fried rice"]},
+  {name:"Trader Joe's Palak Paneer", brand:"Trader Joe's", cal:250, protein:12, carbs:15, fat:14, serving:"1 cup (227g)", category:"frozen meals", aliases:["tj palak paneer"]},
+  {name:"Trader Joe's Black Bean & Cheese Taquitos", brand:"Trader Joe's", cal:140, protein:5, carbs:16, fat:7, serving:"1 piece (56g)", category:"frozen meals", aliases:["tj taquitos"]},
+  {name:"Trader Joe's Mini Chicken Tacos", brand:"Trader Joe's", cal:190, protein:8, carbs:18, fat:10, serving:"1 taco", category:"frozen meals", aliases:["tj mini tacos"]},
+  {name:"Trader Joe's Hash Browns", brand:"Trader Joe's", cal:150, protein:3, carbs:18, fat:8, serving:"1 patty (56g)", category:"frozen meals", aliases:["tj hash browns"]},
+  {name:"Trader Joe's Turkey Corn Dogs", brand:"Trader Joe's", cal:140, protein:7, carbs:12, fat:7, serving:"1 corn dog", category:"frozen meals", aliases:["tj corn dogs","turkey corn dogs"]},
+  {name:"Trader Joe's Cheese Pizza", brand:"Trader Joe's", cal:300, protein:12, carbs:38, fat:11, serving:"1 slice (100g)", category:"frozen meals", aliases:["tj cheese pizza"]},
+  {name:"Trader Joe's Thai Basil Fried Rice", brand:"Trader Joe's", cal:240, protein:7, carbs:37, fat:7, serving:"1 cup (227g)", category:"frozen meals", aliases:["tj thai basil rice"]},
+  {name:"Trader Joe's Chicken Sausage Italian", brand:"Trader Joe's", cal:150, protein:18, carbs:2, fat:8, serving:"1 link (85g)", category:"prepared foods", aliases:["tj chicken sausage","trader joes sausage"]},
+  {name:"Trader Joe's Chicken Sausage Apple", brand:"Trader Joe's", cal:140, protein:17, carbs:3, fat:7, serving:"1 link (85g)", category:"prepared foods", aliases:["tj apple sausage"]},
+  {name:"Trader Joe's Chicken Sausage Smoked", brand:"Trader Joe's", cal:150, protein:18, carbs:2, fat:8, serving:"1 link (85g)", category:"prepared foods", aliases:["tj smoked sausage"]},
+
+  // === TRADER JOE'S — Snacks ===
+  {name:"Trader Joe's Dark Chocolate Peanut Butter Cups", brand:"Trader Joe's", cal:200, protein:6, carbs:16, fat:14, serving:"2 cups (42g)", category:"snacks", aliases:["tj peanut butter cups","trader joes pb cups"]},
+  {name:"Trader Joe's Cookie Butter", brand:"Trader Joe's", cal:190, protein:3, carbs:22, fat:10, serving:"2 tbsp (32g)", category:"snacks", aliases:["tj cookie butter","speculoos"]},
+  {name:"Trader Joe's Gone Bananas (Frozen Chocolate Bananas)", brand:"Trader Joe's", cal:100, protein:1, carbs:13, fat:5, serving:"1 piece (53g)", category:"frozen treats", aliases:["tj gone bananas","trader joes chocolate bananas"]},
+  {name:"Trader Joe's Trail Mix", brand:"Trader Joe's", cal:180, protein:5, carbs:16, fat:12, serving:"1/4 cup (30g)", category:"snacks", aliases:["tj trail mix"]},
+  {name:"Trader Joe's Dried Mango", brand:"Trader Joe's", cal:100, protein:1, carbs:25, fat:0.2, serving:"1/4 cup (40g)", category:"snacks", aliases:["tj dried mango"]},
+  {name:"Trader Joe's Plantain Chips", brand:"Trader Joe's", cal:150, protein:2, carbs:15, fat:9, serving:"1 oz", category:"snacks", aliases:["tj plantain chips"]},
+  {name:"Trader Joe's Pita Chips", brand:"Trader Joe's", cal:150, protein:3, carbs:17, fat:8, serving:"1 oz", category:"snacks", aliases:["tj pita chips"]},
+  {name:"Trader Joe's Hummus", brand:"Trader Joe's", cal:100, protein:3, carbs:9, fat:6, serving:"2 tbsp (28g)", category:"dips", aliases:["tj hummus"]},
+  {name:"Trader Joe's Guacamole", brand:"Trader Joe's", cal:110, protein:1, carbs:6, fat:9, serving:"2 tbsp (28g)", category:"dips", aliases:["tj guacamole"]},
+  {name:"Trader Joe's Unexpected Cheddar", brand:"Trader Joe's", cal:120, protein:8, carbs:1, fat:9, serving:"1 oz (28g)", category:"snacks", aliases:["tj unexpected cheddar","trader joes cheddar"]},
+  {name:"Trader Joe's Triple Ginger Snaps", brand:"Trader Joe's", cal:140, protein:2, carbs:22, fat:5, serving:"4 cookies (32g)", category:"snacks", aliases:["tj ginger snaps"]},
+  {name:"Trader Joe's Jojo's Chocolate Bites", brand:"Trader Joe's", cal:170, protein:2, carbs:17, fat:10, serving:"1 oz (28g)", category:"snacks", aliases:["tj jojo's","trader joes chocolate bites"]},
+
+  // === COFFEE BEVERAGES — Generic ===
+  {name:"Black Coffee", brand:"Generic", cal:2, protein:0.2, carbs:0, fat:0, serving:"8 oz", category:"drinks", aliases:["black coffee"]},
+  {name:"Coffee with Cream", brand:"Generic", cal:30, protein:0.2, carbs:0.5, fat:3, serving:"8 oz", category:"drinks", aliases:["coffee cream","coffee with cream"]},
+  {name:"Coffee with Sugar", brand:"Generic", cal:60, protein:0, carbs:15, fat:0, serving:"8 oz", category:"drinks", aliases:["coffee sugar"]},
+  {name:"Coffee with Cream and Sugar", brand:"Generic", cal:90, protein:0.2, carbs:15, fat:3, serving:"8 oz", category:"drinks", aliases:["coffee cream sugar","regular coffee"]},
+  {name:"Latte (Oat Milk)", brand:"Generic", cal:170, protein:3, carbs:16, fat:8, serving:"12 oz", category:"drinks", aliases:["oat milk latte","oat latte"]},
+  {name:"Latte (Almond Milk)", brand:"Generic", cal:80, protein:3, carbs:5, fat:4, serving:"12 oz", category:"drinks", aliases:["almond milk latte","almond latte"]},
+  {name:"Mocha", brand:"Generic", cal:240, protein:8, carbs:27, fat:10, serving:"12 oz", category:"drinks", aliases:["mocha"]},
+  {name:"Flat White", brand:"Generic", cal:170, protein:9, carbs:10, fat:9, serving:"12 oz", category:"drinks", aliases:["flat white"]},
+  {name:"Macchiato", brand:"Generic", cal:90, protein:5, carbs:5, fat:5, serving:"12 oz", category:"drinks", aliases:["macchiato"]},
+  {name:"Americano", brand:"Generic", cal:15, protein:1, carbs:2, fat:0, serving:"16 oz", category:"drinks", aliases:["americano"]},
+  {name:"Iced Americano", brand:"Generic", cal:15, protein:1, carbs:2, fat:0, serving:"16 oz", category:"drinks", aliases:["iced americano"]},
+  {name:"Vietnamese Iced Coffee", brand:"Generic", cal:280, protein:2, carbs:28, fat:14, serving:"8 oz", category:"drinks", aliases:["vietnamese coffee","ca phe sua da"]},
+  {name:"Thai Iced Tea", brand:"Generic", cal:180, protein:3, carbs:28, fat:6, serving:"8 oz", category:"drinks", aliases:["thai tea","cha yen"]},
+  {name:"Dirty Chai", brand:"Generic", cal:240, protein:4, carbs:42, fat:5, serving:"12 oz", category:"drinks", aliases:["dirty chai","chai espresso"]},
+  {name:"Nitro Cold Brew", brand:"Generic", cal:5, protein:0.5, carbs:0, fat:0, serving:"16 oz", category:"drinks", aliases:["nitro cold brew","nitro brew"]},
+
+  // === FRUITS — Single Items ===
+  {name:"Plum", brand:"Generic", cal:30, protein:0.5, carbs:7, fat:0.2, serving:"1 medium", category:"fruits", aliases:["plum"]},
+  {name:"Nectarine", brand:"Generic", cal:47, protein:1.2, carbs:11, fat:0.3, serving:"1 medium", category:"fruits", aliases:["nectarine"]},
+  {name:"Papaya", brand:"Generic", cal:55, protein:0.9, carbs:14, fat:0.3, serving:"1 cup", category:"fruits", aliases:["papaya"]},
+  {name:"Lime", brand:"Generic", cal:20, protein:0.5, carbs:7, fat:0.2, serving:"1 medium", category:"fruits", aliases:["lime"]},
+  {name:"Strawberries (1 cup)", brand:"Generic", cal:49, protein:1, carbs:12, fat:0.5, serving:"1 cup (152g)", category:"fruits", aliases:["strawberries","1 cup strawberries"]},
+  {name:"Blueberries (1 cup)", brand:"Generic", cal:85, protein:1.1, carbs:21, fat:0.5, serving:"1 cup (148g)", category:"fruits", aliases:["blueberries","1 cup blueberries"]},
+  {name:"Raspberries (1 cup)", brand:"Generic", cal:64, protein:1.5, carbs:15, fat:0.8, serving:"1 cup (123g)", category:"fruits", aliases:["raspberries","1 cup raspberries"]},
+  {name:"Grapes (1 cup)", brand:"Generic", cal:104, protein:1.1, carbs:27, fat:0.3, serving:"1 cup (151g)", category:"fruits", aliases:["grapes","1 cup grapes"]},
+  {name:"Watermelon (1 cup)", brand:"Generic", cal:46, protein:0.9, carbs:11, fat:0.2, serving:"1 cup cubed (152g)", category:"fruits", aliases:["watermelon"]},
+  {name:"Cantaloupe", brand:"Generic", cal:54, protein:1.3, carbs:13, fat:0.3, serving:"1 cup (160g)", category:"fruits", aliases:["cantaloupe"]},
+  {name:"Honeydew", brand:"Generic", cal:61, protein:0.9, carbs:15, fat:0.3, serving:"1 cup (170g)", category:"fruits", aliases:["honeydew"]},
+  {name:"Pineapple (1 cup)", brand:"Generic", cal:82, protein:0.9, carbs:22, fat:0.2, serving:"1 cup (165g)", category:"fruits", aliases:["pineapple","1 cup pineapple"]},
+
+  // === VEGETABLES — Single Items ===
+  {name:"Cherry Tomatoes", brand:"Generic", cal:27, protein:1.3, carbs:6, fat:0.3, serving:"1 cup (149g)", category:"vegetables", aliases:["cherry tomatoes"]},
+  {name:"Tomato (Medium)", brand:"Generic", cal:22, protein:1.1, carbs:5, fat:0.2, serving:"1 medium", category:"vegetables", aliases:["tomato","medium tomato"]},
+  {name:"Cucumber", brand:"Generic", cal:16, protein:0.8, carbs:4, fat:0.2, serving:"1 cup (104g)", category:"vegetables", aliases:["cucumber"]},
+  {name:"Celery", brand:"Generic", cal:12, protein:0.6, carbs:2, fat:0.1, serving:"1 stalk (40g)", category:"vegetables", aliases:["celery"]},
+  {name:"Carrots (1 Medium)", brand:"Generic", cal:25, protein:0.6, carbs:6, fat:0.1, serving:"1 medium", category:"vegetables", aliases:["carrot","medium carrot"]},
+  {name:"Bell Pepper", brand:"Generic", cal:30, protein:1, carbs:7, fat:0.3, serving:"1 medium (119g)", category:"vegetables", aliases:["bell pepper","pepper"]},
+  {name:"Onion", brand:"Generic", cal:45, protein:1.1, carbs:11, fat:0.1, serving:"1 medium", category:"vegetables", aliases:["onion"]},
+  {name:"Garlic (1 Clove)", brand:"Generic", cal:4, protein:0.2, carbs:1, fat:0, serving:"1 clove", category:"vegetables", aliases:["garlic","garlic clove"]},
+  {name:"Mushrooms (1 Cup)", brand:"Generic", cal:15, protein:2.2, carbs:2, fat:0.1, serving:"1 cup (70g)", category:"vegetables", aliases:["mushrooms","1 cup mushrooms"]},
+  {name:"Spinach (1 Cup Raw)", brand:"Generic", cal:7, protein:0.9, carbs:1, fat:0.1, serving:"1 cup raw (30g)", category:"vegetables", aliases:["spinach","raw spinach"]},
+  {name:"Broccoli (1 Cup)", brand:"Generic", cal:31, protein:3.3, carbs:6, fat:0.4, serving:"1 cup (91g)", category:"vegetables", aliases:["broccoli","1 cup broccoli"]},
+  {name:"Sweet Potato (Medium)", brand:"Generic", cal:103, protein:2.3, carbs:23, fat:0.1, serving:"1 medium (100g)", category:"vegetables", aliases:["sweet potato"]},
+  {name:"Russet Potato (Medium)", brand:"Generic", cal:165, protein:4.3, carbs:37, fat:0.1, serving:"1 medium (173g)", category:"vegetables", aliases:["russet potato","potato"]},
+  {name:"Corn on the Cob", brand:"Generic", cal:77, protein:2.9, carbs:17, fat:1.1, serving:"1 medium ear (102g)", category:"vegetables", aliases:["corn on cob","corn cob"]},
+
+  // === EGGS — Single Items ===
+  {name:"Scrambled Egg (1)", brand:"Generic", cal:91, protein:6.4, carbs:0.4, fat:7, serving:"1 egg", category:"protein", aliases:["1 scrambled egg","scrambled egg"]},
+  {name:"Fried Egg (1)", brand:"Generic", cal:90, protein:6.3, carbs:0.6, fat:7, serving:"1 egg", category:"protein", aliases:["1 fried egg","fried egg"]},
+  {name:"Poached Egg (1)", brand:"Generic", cal:71, protein:6.3, carbs:0.4, fat:5, serving:"1 egg", category:"protein", aliases:["1 poached egg","poached egg"]},
+
+  // === SANDWICHES & SIMPLE MEALS ===
+  {name:"Tuna Salad Sandwich", brand:"Generic", cal:340, protein:20, carbs:35, fat:14, serving:"1 sandwich", category:"meals", aliases:["tuna sandwich"]},
+  {name:"Ham Sandwich", brand:"Generic", cal:320, protein:18, carbs:35, fat:11, serving:"1 sandwich", category:"meals", aliases:["ham sandwich"]},
+  {name:"Club Sandwich", brand:"Generic", cal:450, protein:28, carbs:35, fat:22, serving:"1 sandwich", category:"meals", aliases:["club sandwich"]},
+  {name:"Burrito (Bean & Cheese)", brand:"Generic", cal:520, protein:16, carbs:68, fat:18, serving:"1 burrito", category:"meals", aliases:["bean cheese burrito","bean burrito"]},
+  {name:"Pasta with Marinara Sauce", brand:"Generic", cal:380, protein:12, carbs:68, fat:6, serving:"1 plate", category:"meals", aliases:["pasta marinara"]},
+  {name:"Beef Stir Fry with Rice", brand:"Generic", cal:520, protein:32, carbs:52, fat:16, serving:"1 plate", category:"meals", aliases:["beef stir fry"]},
+  {name:"Tofu Stir Fry with Rice", brand:"Generic", cal:420, protein:18, carbs:50, fat:16, serving:"1 plate", category:"meals", aliases:["tofu stir fry"]},
+  {name:"Shrimp Fried Rice", brand:"Generic", cal:380, protein:20, carbs:45, fat:12, serving:"1 plate", category:"meals", aliases:["shrimp fried rice"]},
+  {name:"Vegetable Fried Rice", brand:"Generic", cal:320, protein:10, carbs:48, fat:8, serving:"1 plate", category:"meals", aliases:["veggie fried rice","vegetable rice"]},
+  {name:"Pad Thai", brand:"Generic", cal:420, protein:14, carbs:52, fat:16, serving:"1 plate", category:"meals", aliases:["pad thai"]},
+  {name:"Pho", brand:"Generic", cal:280, protein:16, carbs:32, fat:8, serving:"1 bowl", category:"meals", aliases:["pho"]},
+  {name:"Ramen (Restaurant Style)", brand:"Generic", cal:520, protein:18, carbs:68, fat:16, serving:"1 bowl", category:"meals", aliases:["ramen","restaurant ramen"]},
+  {name:"California Roll", brand:"Generic", cal:255, protein:8, carbs:32, fat:10, serving:"6 pieces", category:"meals", aliases:["california roll"]},
+  {name:"Spicy Tuna Roll", brand:"Generic", cal:290, protein:14, carbs:30, fat:12, serving:"6 pieces", category:"meals", aliases:["spicy tuna roll"]},
+  {name:"Salmon Roll", brand:"Generic", cal:280, protein:12, carbs:31, fat:11, serving:"6 pieces", category:"meals", aliases:["salmon roll"]},
+  {name:"Grilled Chicken Salad", brand:"Generic", cal:380, protein:36, carbs:18, fat:18, serving:"1 salad", category:"meals", aliases:["grilled chicken salad"]},
+  {name:"Acai Bowl", brand:"Generic", cal:320, protein:8, carbs:48, fat:10, serving:"1 bowl", category:"meals", aliases:["acai bowl","açaí bowl"]},
+  {name:"Smoothie Bowl", brand:"Generic", cal:380, protein:12, carbs:60, fat:10, serving:"1 bowl", category:"meals", aliases:["smoothie bowl"]},
+  {name:"Overnight Oats", brand:"Generic", cal:340, protein:12, carbs:45, fat:12, serving:"1 serving", category:"meals", aliases:["overnight oats"]},
+  {name:"Protein Pancakes", brand:"Generic", cal:280, protein:20, carbs:32, fat:8, serving:"2 pancakes", category:"meals", aliases:["protein pancakes"]},
+  {name:"Greek Salad", brand:"Generic", cal:320, protein:12, carbs:20, fat:22, serving:"1 salad", category:"meals", aliases:["greek salad"]},
+  {name:"Chicken Soup", brand:"Generic", cal:180, protein:15, carbs:18, fat:6, serving:"1 bowl", category:"meals", aliases:["chicken soup"]},
+  {name:"Tomato Soup", brand:"Generic", cal:140, protein:4, carbs:24, fat:4, serving:"1 bowl", category:"meals", aliases:["tomato soup"]},
 ];
 
 // ============================================================
@@ -3250,8 +3366,10 @@ function fuzzyMatch(query, items) {
     // Exact name match
     if (nameLower === query || nameLower === cleanQuery) score += 100;
 
-    // Exact alias match
+    // Exact alias match (check both full query "3 eggs" and cleaned query "eggs")
     if (item.aliases && item.aliases.some(a => a === query || a === cleanQuery)) score += 95;
+    // Also check if full original query (with number) matches an alias exactly e.g. "3 eggs" alias
+    if (item.aliases && item.aliases.some(a => a === allQueryWords.join(' '))) score += 98;
 
     // Name starts with query
     if (nameLower.startsWith(cleanQuery)) score += 50;
@@ -3335,53 +3453,128 @@ function parseCompoundFood(input) {
 function parseSingleFoodWithQuantity(input) {
   input = input.trim();
 
-  // Try to extract quantity like "2 scoops protein", "3 eggs", "2x protein bar"
   let qty = 1;
   let cleanInput = input;
 
-  // Pattern: "N scoop(s) of X" or "N X"
-  const qtyPatterns = [
-    /^(\d+\.?\d*)\s*(?:x|×)\s*/i,                          // "2x protein bar"
-    /^(\d+\.?\d*)\s*scoops?\s+(?:of\s+)?/i,               // "2 scoops protein" or "2 scoops of protein"
-    /^(\d+\.?\d*)\s*servings?\s+(?:of\s+)?/i,             // "2 servings of rice"
-    /^(\d+\.?\d*)\s*pieces?\s+(?:of\s+)?/i,               // "3 pieces of sushi"
-    /^(\d+\.?\d*)\s*slices?\s+(?:of\s+)?/i,               // "2 slices pizza"
-    /^(\d+\.?\d*)\s*cups?\s+(?:of\s+)?/i,                 // "2 cups rice"
-    /^(\d+\.?\d*)\s*(?:tbsp|tablespoons?)\s+(?:of\s+)?/i, // "2 tbsp peanut butter"
-    /^(\d+\.?\d*)\s*oz\s+(?:of\s+)?/i,                    // "6 oz salmon"
-  ];
+  // Word-to-number map for natural language quantities
+  const wordNums = {
+    'a': 1, 'an': 1, 'one': 1, 'single': 1,
+    'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
+    'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'twelve': 12,
+    'half': 0.5, 'quarter': 0.25, 'double': 2, 'triple': 3,
+  };
 
-  for (const pattern of qtyPatterns) {
-    const match = input.match(pattern);
-    if (match) {
-      qty = parseFloat(match[1]);
-      cleanInput = input.slice(match[0].length).trim();
-      break;
+  // Pattern 1: "half a chicken breast", "a quarter of pizza"
+  const fractionWordMatch = input.match(/^(half|quarter|double|triple)\s+(?:a\s+|an\s+|of\s+(?:a\s+)?)?(.+)/i);
+  if (fractionWordMatch) {
+    qty = wordNums[fractionWordMatch[1].toLowerCase()] || 1;
+    cleanInput = fractionWordMatch[2].trim();
+  }
+  // Pattern 2: "a protein bar", "an apple"
+  else if (/^(a|an)\s+/i.test(input)) {
+    qty = 1;
+    cleanInput = input.replace(/^(a|an)\s+/i, '').trim();
+  }
+  // Pattern 3: Unit-based — "2 scoops protein", "3 slices pizza"
+  else {
+    const qtyPatterns = [
+      /^(\d+\.?\d*)\s*(?:x|×)\s*/i,                          // "2x protein bar"
+      /^(\d+\.?\d*)\s*scoops?\s+(?:of\s+)?/i,               // "2 scoops protein"
+      /^(\d+\.?\d*)\s*servings?\s+(?:of\s+)?/i,             // "2 servings rice"
+      /^(\d+\.?\d*)\s*pieces?\s+(?:of\s+)?/i,               // "3 pieces sushi"
+      /^(\d+\.?\d*)\s*slices?\s+(?:of\s+)?/i,               // "2 slices pizza"
+      /^(\d+\.?\d*)\s*cups?\s+(?:of\s+)?/i,                 // "2 cups rice"
+      /^(\d+\.?\d*)\s*(?:tbsp|tablespoons?)\s+(?:of\s+)?/i, // "2 tbsp peanut butter"
+      /^(\d+\.?\d*)\s*oz\s+(?:of\s+)?/i,                    // "6 oz salmon"
+      /^(\d+\.?\d*)\s*(?:strips?|tenders?|fingers?|wings?|drumsticks?|thighs?|breasts?|fillets?|patties?|links?|rashers?)\s+(?:of\s+)?/i, // "3 tenders chicken"
+      /^(\d+\.?\d*)\s*(?:bowls?|plates?|bags?|packets?|bars?|cans?|bottles?)\s+(?:of\s+)?/i, // "2 bowls soup"
+    ];
+
+    let matched = false;
+    for (const pattern of qtyPatterns) {
+      const match = input.match(pattern);
+      if (match) {
+        qty = parseFloat(match[1]);
+        cleanInput = input.slice(match[0].length).trim();
+        matched = true;
+        break;
+      }
+    }
+
+    // Pattern 4: Bare number prefix — "6 scrambled eggs", "3 eggs", "2 bananas"
+    if (!matched) {
+      const bareNum = input.match(/^(\d+\.?\d*)\s+(.+)/);
+      if (bareNum) {
+        qty = parseFloat(bareNum[1]);
+        cleanInput = bareNum[2].trim();
+      }
+    }
+
+    // Pattern 5: Word number prefix — "two eggs", "six tacos", "three bananas"
+    if (!matched && qty === 1) {
+      const wordMatch = input.match(/^(one|two|three|four|five|six|seven|eight|nine|ten|twelve|single|double|triple)\s+(.+)/i);
+      if (wordMatch) {
+        qty = wordNums[wordMatch[1].toLowerCase()] || 1;
+        cleanInput = wordMatch[2].trim();
+      }
     }
   }
 
-  // For scoop-based queries, try matching with "scoop" in the search
+  // Try matching the FULL original input first (e.g. "3 eggs" matches alias "3 eggs" directly)
+  let matches = fuzzyMatch(input.toLowerCase(), FOOD_DB);
+  const fullInputBestScore = matches.length > 0 ? matches[0].score : 0;
+
+  // Then try the cleaned input (quantity stripped)
   let searchQuery = cleanInput;
+  const singularQuery = cleanInput.replace(/s$/, '');
+
+  const cleanMatches = fuzzyMatch(searchQuery, FOOD_DB);
+  if (cleanMatches.length > 0 && cleanMatches[0].score > fullInputBestScore) {
+    matches = cleanMatches;
+  }
+
+  // Try singular form: "eggs" -> "egg", "bananas" -> "banana"
+  if (matches.length === 0 || matches[0].score < 20) {
+    const singularMatches = fuzzyMatch(singularQuery, FOOD_DB);
+    if (singularMatches.length > 0 && singularMatches[0].score > (matches[0]?.score || 0)) {
+      matches = singularMatches;
+    }
+  }
+
+  // For scoop-based queries
   if (/scoops?/i.test(input) && !/scoops?/i.test(cleanInput)) {
-    // The word "scoop" was stripped, but it's relevant for matching supplements
     searchQuery = cleanInput;
   }
 
-  // First: try fuzzyMatch on the DB
-  const matches = fuzzyMatch(searchQuery, FOOD_DB);
+  // Also try with adjectives stripped: "scrambled eggs" -> "eggs", "grilled chicken" -> "chicken"
+  if (matches.length === 0 || matches[0].score < 20) {
+    const adjectives = /^(scrambled|fried|boiled|grilled|baked|roasted|steamed|sauteed|raw|fresh|frozen|canned|dried|smoked|bbq|crispy|spicy|hot|cold|plain|whole|diced|chopped|mashed|creamy|crunchy|sweet|sour|salted|unsalted|buttered|toasted|poached)\s+/i;
+    const stripped = cleanInput.replace(adjectives, '');
+    if (stripped !== cleanInput) {
+      const adjMatches = fuzzyMatch(stripped, FOOD_DB);
+      if (adjMatches.length > 0 && adjMatches[0].score > (matches[0]?.score || 0)) {
+        matches = adjMatches;
+        // Preserve the adjective in the display name
+        if (matches[0]) matches[0].name = cleanInput.charAt(0).toUpperCase() + cleanInput.slice(1);
+      }
+    }
+  }
 
-  if (matches.length > 0 && matches[0].score >= 20) {
+  if (matches.length > 0 && matches[0].score >= 15) {
     const best = matches[0];
+
+    // If the full input matched an alias exactly, don't apply qty multiplier (DB entry already correct)
+    const fullInputLower = input.toLowerCase().trim();
+    if (best.aliases && best.aliases.some(a => a === fullInputLower)) {
+      qty = 1;
+    }
 
     // If user specified scoops and the best match is per-scoop, apply multiplier
     if (/scoops?/i.test(input) && /scoop/i.test(best.serving)) {
-      // Check if the matched item already accounts for the qty
-      // e.g., "2 scoops" matched "Whey Protein (2 scoops)" directly
       const matchScoopNum = best.name.match(/\((\d+)\s*scoop/i);
       if (matchScoopNum && parseInt(matchScoopNum[1]) === Math.round(qty)) {
-        qty = 1; // Already matched the right serving
+        qty = 1;
       } else if (matchScoopNum) {
-        // Matched a different scoop count, adjust
         qty = qty / parseInt(matchScoopNum[1]);
       }
     }
